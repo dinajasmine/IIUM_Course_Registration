@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
     <h2>Manual Course Registration</h2>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
 </head>
 <body>
-    <form method = "POST">
+    @if(session('success'))
+        <p style="color:green">{{ session('success') }}</p>
+    @endif
+    
+    <form method = "POST" action="/student/manual-register">
         @csrf
-        <label>Select Subject</label>
-        <select name="subject_id">
-            @foreach($subjects as $subject)
-                <option value = "{{ $subject->id }}">
-                    {{ $subject->code }} - {{$subject->name }}
-                </option>
-            @endforeach
-        </select>
+
+        <label>Subject :</label>
+        <textarea name="subject" rows="1" cols="50" required></textarea>
+
+        <br><br>
+        <label>Reason for Manual Registration:</label>
+        <textarea name="reason" rows="1" cols="50" required></textarea>
         
-        <button type="submit">Register Course</button>
+        <br><br>
+        <button type="submit">Submit</button>
     </form> 
 </body>
 </html>
