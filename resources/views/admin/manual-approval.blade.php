@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <h2>Manual Registration Approval</h2>
-</head>
-<body>
+@extends('student.layout')
+@section('content')
+
+<h1>Manual Registration Approval</h1>
+
     <table border="1">
         <tr>
             <th>Student ID</th>
@@ -25,5 +24,4 @@
             </form>
         </td>
     @endforeach
-</body>
-</html>
+

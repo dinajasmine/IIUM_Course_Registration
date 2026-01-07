@@ -8,10 +8,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
+
 Route::get('/student/manual-registration', [StudentController::class, 'manual']);
 Route::post('/student/manual-registration', [StudentController::class, 'storeManual']);
-
-Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
 
 Route::get('/admin/manual-approval', [AdminController::class, 'manualApproval']);
 Route::post('/admin/manual-approval/{id}', [AdminController::class, 'approve']);
