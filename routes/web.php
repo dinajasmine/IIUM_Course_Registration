@@ -8,14 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< Updated upstream
-=======
 Route::get('/login', function () {
     return view('login'); 
 });
 
 Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
->>>>>>> Stashed changes
+
 
 /*STUDENT ROUTES*/
 Route::prefix('student')->group(function () {
