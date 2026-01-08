@@ -5,11 +5,13 @@ use App\Models\Subject;
 use App\Models\Registration;
 
 class AdminController extends Controller{
+
     public function manualApproval(){
-
-        $registrations = Registration::where('status', 'pending')->get();
-        return view('admin.manual-approval', compact('registrations'));
-
+    $registrations = Registration::where('status', 'pending')
+        ->with('student')
+        ->get();
+    
+    return view('admin.manual-approval', compact('registrations'));
     }
 
     public function approve($id){

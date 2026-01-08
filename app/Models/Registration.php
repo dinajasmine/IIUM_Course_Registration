@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registration extends Model
 {
+    protected $table ='registrations';
+
+    public function student(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     protected $fillable = [
         'user_id',
         'subject_id',
@@ -15,6 +21,6 @@ class Registration extends Model
     ];
 
     public function subject(){
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 }

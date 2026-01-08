@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    
     <style>
         body { 
-            display:flex; 
             font-family: Arial;
             margin:0;
         }
@@ -60,38 +61,41 @@
         .content{
             padding: 20px;
             flex: 1;
+            overflow-y: auto;
         }
     </style>
+</head>
 
 <body>
 
     <!--IIUM BANNER-->
     <div style="width:100%; background:#ffffff; border-bottom:1px solid #ccc; text-align:center;">
-        <div class="banner" style="display:inline-block; background:linear-gradient(135deg, #2c3e50 0%, #1abc9c 100%)">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/IIUM_Logo_2019.svg" 
-                alt="IIUM Banner"
-                style="width:800px; height:200px; object-fit:contain;">
+        <div class="banner-container">
+            <div class="banner" style="display:inline-block; background:linear-gradient(135deg, #2c3e50 0%, #1abc9c 100%)">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/IIUM_Logo_2019.svg" 
+                    alt="IIUM Banner"
+                    style="width:800px; height:200px; object-fit:contain;">
+            </div>
         </div>
-    
 
         <div class="main-container">
 
             <div class="sidebar">
-                <h3>Student Menu</h3>
+                <h3>Admin Menu</h3>
 
-                <a href="/student/dashboard"
-                    class="{{ request()->is('student/dashboard') ? 'active' : '' }}">
+                <a href="/admin/dashboard"
+                    class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
                     Dashboard
                 </a>
 
-                <a href="/student/manual-register"
-                    class="{{ request()->is('student/manual-register') ? 'active' : '' }}">
-                    Manual Registration
+                <a href="/admin/assign-subject"
+                    class="{{ request()->is('admin/assign-subject') ? 'active' : '' }}">
+                    Assign Subject
                 </a>
 
-                <a href="/student/schedule"
-                    class="{{ request()->is('student/schedule') ? 'active' : '' }}">
-                    Schedule
+                <a href="/admin/manual-approval"
+                    class="{{ request()->is('admin/manual-approval') ? 'active' : '' }}">
+                    Manual Approval
                 </a>
 
                 <a href="/student/logout">
@@ -105,6 +109,5 @@
 
         </div>
     </div>
-
 </body>
 </html>
