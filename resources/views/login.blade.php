@@ -6,14 +6,21 @@
 
     <style>
         body {
-            background-color: #0f3c4c;
+            min-height: 100vh;
+            margin: 0;
             font-family: Arial, sans-serif;
+
+            background: linear-gradient(90deg,
+            #1e3c4f,
+            #1f6f6b,
+            #2aa18b
+    );
         }
 
         .login-box {
             width: 500px;
             margin: 80px auto;
-            background: #f2f2f2;
+            background: #eee2e2;
             padding: 30px;
             border-radius: 6px;
         }
