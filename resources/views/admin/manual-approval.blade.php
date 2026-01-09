@@ -29,7 +29,8 @@
                     <th>Student Name</th>
                     <th>Subject</th>
                     <th>Course Code</th>
-                    <th>Credit Hours</th>
+                    <th>Current Credit Hours</th>
+                    <th>Completed Credit Hours</th>
                     <th>Reason</th>
                     <th>Actions</th>
                 </tr>
@@ -39,9 +40,10 @@
                 @foreach ($registrations as $registration)
                 <tr>
                     <td>{{ $registration->student->name ?? 'N/A'}}</td>
-                    <td>{{ $registration->subject->name ?? 'N/A'}}</td>
+                    <td>{{ $registration->subject_name ?? 'N/A'}}</td>
                     <td>{{ $registration->course_code }}</td>
-                    <td>{{ $registration->credit_hours }}</td>
+                    <td>{{ $registration->current_credit_hours }}</td>
+                    <td>{{ $registration->completed_credit_hours }}</td>
                     <td>{{ $registration->reason }}</td>
                     <td class="reason-cell">{{$registration->reason}}</td>
                     <td class="action-cell">

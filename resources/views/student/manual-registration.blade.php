@@ -33,6 +33,7 @@
         <form method="POST" action="{{ route('student.manual-register.store') }}" class="registration-form">
             @csrf
             
+            <input type="hidden" name="registration_type" value="MANUAL">
             <!-- Subject Information -->
             <div class="form-section">
                 <h3>Course Information</h3>
@@ -59,22 +60,66 @@
                                id="course_code" 
                                name="course_code" 
                                value="{{ old('course_code') }}"
-                               placeholder="e.g., CSCI1010"
+                               placeholder="e.g., BICS 2303"
                                required>
                     </div>
                     
+                    <!--current credit hour-->
                     <div class="form-group">
-                        <label for="credit_hours">
+                        <label for="current_credit_hours">
                             Current Credit Hours :
                         </label>
-                        <input type="double" 
-                               id="credit_hours" 
-                               name="credit_hours" 
-                               value="{{ old('credit_hours') }}"
-                               placeholder="e.g., 3"
+                        <input type="number" 
+                               step="0.5" 
+                               min="0"
+                               max="999.99"
+                               id="current_credit_hours" 
+                               name="current_credit_hours" 
+                               value="{{ old('current_credit_hours') }}"
+                               placeholder="e.g., 12.5"
                                required>
                     </div>
-                    
+
+                    <div class="form-group">
+                        <label for="completed_credit_hours">
+                            Completed Credit Hours :
+                        </label>
+                        <input type="number" 
+                               step="0.5" 
+                               min="0"
+                               max="999.99"
+                               id="completed_credit_hours" 
+                               name="completed_credit_hours" 
+                               value="{{ old('completed_credit_hours') }}"
+                               placeholder="e.g., 3"
+                               >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cgpa">
+                            CGPA :
+                        </label>
+                        <input type="number" 
+                               step="any" 
+                               id="cgpa" 
+                               name="cgpa" 
+                               value="{{ old('cgpa') }}"
+                               placeholder="e.g., 3.5"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requested_section">
+                            Requested Section :
+                        </label>
+                        <input type="text" 
+                               id="requested_section" 
+                               name="requested_section" 
+                               value="{{ old('requested_section') }}"
+                               placeholder="e.g., Section 5"
+                               required>
+                    </div>
+
                     <div class="form-group">
                         <label for="semester">
                             Semester :
@@ -100,8 +145,7 @@
                               name="reason" 
                               rows="2" 
                               placeholder="Please provide a detailed explanation for your manual registration request."
-                              required>
-                    </textarea>
+                              required>{{ old('reason') }}</textarea>
                 </div>
             </div>
 
@@ -120,7 +164,6 @@
                 <div class="form-footer">
                     Your request will be reviewed within 3-5 working days.</p>
                 </div>
-            </div>
         </form>
     </div>
 </div>
