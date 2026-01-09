@@ -2,31 +2,32 @@
 
 namespace App\Models;
 
-use App\Models\Registration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Subject extends Model
+class Student extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'code',
+        'matric_no',
         'name',
-        'credit',
+        'email',
+        'password',
+        'phone',
+        'program',
+        'semester',
+        'year',
         'faculty',
         'kulliyyah',
-        'description',
-        'prerequisites',
+        'current_credit',
+        'max_credit',
         'is_active'
     ];
 
-     public function sections(): HasMany
+    public function registrations(): HasMany
     {
-        return $this->hasMany(Section::class);
-    }
-
-    public function registrations(){
         return $this->hasMany(Registration::class);
     }
 }
