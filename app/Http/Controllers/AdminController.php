@@ -6,6 +6,11 @@ use App\Models\Registration;
 
 class AdminController extends Controller{
 
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
+
     public function manualApproval(){
     $registrations = Registration::where('status', 'pending')
         ->with('student')
