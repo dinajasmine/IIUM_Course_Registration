@@ -47,15 +47,19 @@
                     <td>{{ $registration->reason }}</td>
                     <td class="reason-cell">{{$registration->reason}}</td>
                     <td class="action-cell">
-                        <form method="POST" action="{{ url('/admin/manual-approval/' . $registration->id . '/approve') }}" class="inline-form">
+                        <form method="POST" action="{{ route('admin.manual-approval.approve', $registration->id) }}" 
+                              class="inline-form"
+                              onsubmit="return confirm('Approve this registration?')">
                             @csrf
-                            <button type="submit" class="btn-approve">Approve</button>
+                            <button type="submit" class="btn-approve">✓ Approve</button>
                         </form>
 
-                        <form method="POST" action="{{ url('/admin/manual-approval/' . $registration->id . '/reject') }}" class="inline-form">
+                        <form method="POST" action="{{ route('admin.manual-approval.reject', $registration->id) }}" 
+                              class="inline-form"
+                              onsubmit="return confirm('Reject this registration?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn-reject">Reject</button>
+                            <button type="submit" class="btn-reject">✗ Reject</button>
                         </form>
                     </td>
                 </tr>

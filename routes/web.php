@@ -7,30 +7,32 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\SubjectAssignmentController;
 use App\Http\Controllers\AuthController;
 
-// Default redirect
-Route::get('/', function () {
-    return view('welcome');
-});
+//redirect to login page
+Route::redirect('/', '/login');
 
-Route::get('/login', function () {
-    return view('login'); 
-});
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
->>>>>>> Stashed changes
 
-/*STUDENT ROUTES*/
-Route::prefix('student')->group(function () {
-    //Route::middleware(['auth', 'role:student'])->group(function () {
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// STUDENT ROUTES
+Route::prefix('student') //->middleware(['auth'])
+        ->group(function () {
+        //dashboard
         Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
-        Route::get('/manual-registration', [StudentController::class, 'manual'])->name('student.manual-registration');
-        Route::post('/manual-registration', [StudentController::class, 'storeManual'])->name('student.manual-register.store');
-        //Route::get('/logout', [StudentController::class, 'logout'])->name('student.logout'); optional (kalau perlu buang //)
+
+        //manual registration
+        Route::get('/manual-registration', [ManualRegistrationController::class, 'create'])->name('student.manual-registration.create');
+        Route::post('/manual-registration', [ManualRegistrationController::class, 'store'])->name('student.manual-register.store');
+
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-
-/*ADMIN ROUTES*/
-Route::prefix('admin')->group(function () {
+// ADMIN ROUTES
+Route::prefix('admin') //->middleware(['auth', 'user_type:ADMIN'])
+    ->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
