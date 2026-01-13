@@ -2,6 +2,11 @@
     @extends('student.layout')
 
     @section('content')
+
+    <head>
+    <title>Student Dashboard</title>
+    </head>
+
     <h1>Student Dashboard</h1>
     <h2>Welcome {{ auth()->user()->name }}!</h2>
 

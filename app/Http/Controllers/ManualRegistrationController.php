@@ -14,6 +14,7 @@ class ManualRegistrationController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            //'user_id' => 'required|exists:users,id',
             'subject_name' => 'required|string|max:255',
             'course_code' => 'required|string|max:255',
             'current_credit_hours' => 'required|numeric|min:0|max:999.99',

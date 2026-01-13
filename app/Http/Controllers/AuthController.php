@@ -22,21 +22,40 @@ class AuthController extends Controller
         'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        $user = \App\Models\User::where('username', $credentials['username'])->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'username' => 'Username not found.',
+            ])->withInput($request->except('password'));
         }
 
-        $user = Auth::user();
+        //check password
+        if (!\Hash::check($credentials['password'], $user->password)) {
+            return back()->withErrors([
+                'password' => 'Incorrect password.',
+            ])->withInput($request->except('password'));
+        }
 
-        if ($user->user_type === 'ADMIN') {
-            return redirect()->intended('/admin/dashboard');
-        } elseif ($user->user_type === 'STUDENT') {
-            return redirect()->intended('/student/dashboard');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->user_type === 'ADMIN') {
+                return redirect()->intended('/admin/dashboard');
+            } elseif ($user->user_type === 'STUDENT') {
+                return redirect()->intended('/student/dashboard');
+            }
+
+            return redirect()->route('/login');
+
         }
 
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
+            'username' => 'Login failed. Please try again',
+        ])->withInput($request->except('password'));
     }
 
     public function logout(Request $request)
@@ -44,7 +63,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/login')->with('success', 'Logged out successfully.');
     }
 
 }

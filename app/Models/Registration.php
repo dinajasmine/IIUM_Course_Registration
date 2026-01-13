@@ -11,7 +11,7 @@ class Registration extends Model
     protected $table ='registrations';
 
     protected $fillable = [
-        'student_id',
+        'user_id',
         'subject_id',
         'subject_name',
         'course_code',

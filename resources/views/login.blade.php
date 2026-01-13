@@ -59,11 +59,33 @@
             font-weight: bold;
             cursor: pointer;
         }
+
+        .error-field {
+            border-color: #e74c3c !important;
+            background-color: #fff5f5;
+        }
     </style>
 </head>
 <body>
 
     <div class="login-box">
+        <!--error display-->
+
+        @if($errors->any())
+            <div style="background: #f8d7da; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+                <strong>Login Failed!</strong>
+                @foreach($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+        
+        @if(session('success'))
+            <div style="background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="logo">
             <img src="{{ asset('logo2.png') }}" alt="Logo">
             <p style="text-align:center; font-weight:bold; margin-top:10px;">Welcome to IIUM Course Registration.</p>

@@ -39,7 +39,9 @@ return new class extends Migration
             $table->foreignId('approved_by')->nullable()->references('id')->on('users');
             $table->timestamp('approved_at')->nullable();
 
-            
+            $table->foreignId('rejected_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamp('rejected_at')->nullable();
+            $table->text('rejection_reason')->nullable();
 
             $table->timestamps();
         });

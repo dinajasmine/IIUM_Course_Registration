@@ -13,6 +13,10 @@ Route::redirect('/', '/login');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
+Route::middleware('throttle:5,1')->group(function () {
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+});
+
 Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
