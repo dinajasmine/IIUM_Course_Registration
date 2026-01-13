@@ -21,16 +21,6 @@ class StudentController extends Controller{
             'reason' => 'required|string|max:1000',
         ]);
 
-        Registration::create([
-            'user_id' => 1, //TEMPORARY student id(later change to auth()->id())
-            'subject_name' => $request->subject_name,
-            'course_code' => $request->course_code,
-            'credit_hours' => $request->credit_hours,
-            'semester' => $request->semester,
-            'reason' => $request->reason,
-            'status' => 'pending'
-        ]);
-
         return redirect()->route('student.manual-registration')->with('success', 'Registration submitted successfully!');
     }
 

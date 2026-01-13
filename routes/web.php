@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ManualRegistrationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegistrationController;
 
@@ -24,8 +25,8 @@ Route::get('/', function () {
 Route::prefix('student')->group(function () {
     //Route::middleware(['auth', 'role:student'])->group(function () {
         Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
-        Route::get('/manual-registration', [StudentController::class, 'manual'])->name('student.manual-registration');
-        Route::post('/manual-registration', [StudentController::class, 'storeManual'])->name('student.manual-register.store');
+        Route::get('/manual-registration', [ManualRegistrationController::class, 'create'])->name('student.manual-registration');
+        Route::post('/manual-registration', [ManualRegistrationController::class, 'store'])->name('student.manual-register.store');
         //Route::get('/logout', [StudentController::class, 'logout'])->name('student.logout'); optional (kalau perlu buang //)
         Route::get('/registration', [RegistrationController::class, 'index'])->name('registration.index');
         Route::post('/registration/register', [RegistrationController::class, 'register'])->name('registration.register');

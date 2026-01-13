@@ -23,6 +23,7 @@ class Registration extends Model
         'subject_id',
         'status'
     ];
+    
 
     public function subject(){
         return $this->belongsTo(Subject::class, 'subject_id');
