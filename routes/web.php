@@ -4,13 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ManualRegistrationController;
 use App\Http\Controllers\AdminController;
-<<<<<<< HEAD
-use App\Http\Controllers\RegistrationController;
-
-=======
+use App\Http\Controllers\CourseRegistrationController;
 use App\Http\Controllers\Admin\SubjectAssignmentController;
 use App\Http\Controllers\AuthController;
->>>>>>> c9645901661f3d85a12d062af6d215c4533d03c4
 
 //redirect to login page
 Route::redirect('/', '/login');
@@ -20,24 +16,25 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
 
-<<<<<<< HEAD
-Route::get('/', function () {
-    return redirect('/student/registration'); 
-});
-=======
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
->>>>>>> c9645901661f3d85a12d062af6d215c4533d03c4
 
 // STUDENT ROUTES
-Route::prefix('student') //->middleware(['auth'])
+        Route::prefix('student') //->middleware(['auth'])
         ->group(function () {
         //dashboard
         Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
 
+        Route::get('/student/registration', [CourseRegistrationController::class, 'index'])
+            ->name('student.registration');
+        Route::post('/course/register', [CourseRegistrationController::class, 'register'])
+            ->name('course.register');
+        Route::post('/course/unregister', [CourseRegistrationController::class, 'unregister'])
+            ->name('course.unregister');
+        
         //manual registration
         Route::get('/manual-registration', [ManualRegistrationController::class, 'create'])->name('student.manual-registration.create');
         Route::post('/manual-registration', [ManualRegistrationController::class, 'store'])->name('student.manual-register.store');
-<<<<<<< HEAD
+        
         //Route::get('/logout', [StudentController::class, 'logout'])->name('student.logout'); optional (kalau perlu buang //)
         Route::get('/registration', [RegistrationController::class, 'index'])->name('registration.index');
         Route::post('/registration/register', [RegistrationController::class, 'register'])->name('registration.register');
@@ -55,7 +52,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/manual-approval/{id}/approve', [AdminController::class, 'approve'])->name('admin.manual-approval.approve');
         Route::delete('/manual-approval/{id}/reject', [AdminController::class, 'reject'])->name('admin.manual-approval.reject');
         //Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout'); optional (kalau perlu buang //)
-=======
 
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
@@ -82,5 +78,4 @@ Route::prefix('admin') //->middleware(['auth', 'user_type:ADMIN'])
 
     Route::post('/subject-assignment', [SubjectAssignmentController::class, 'store'])
         ->name('admin.subject.assignment.store');
->>>>>>> c9645901661f3d85a12d062af6d215c4533d03c4
 });

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             //Student 
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('matric_no')->constrained()->cascadeOnDelete();
 
             //Course Reference (auto registration)
             $table->foreignId('subject_id')->nullable()->constrained()->cascadeOnDelete(); 
