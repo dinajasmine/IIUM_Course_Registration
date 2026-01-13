@@ -29,4 +29,20 @@ class StudentController extends Controller{
         return view('student.dashboard', compact('registrations'));
 
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect('/login')->with('success', 'You have been logged out.');
+    }
+
+    public function registrationStatus(){
+        $registrations = \App\Models\Registration::where('student_id', auth()->id())
+            ->orderBy('created_at', 'desc')    
+            ->get();
+        return view('student.registration-status', compact('registrations'));
+    }
 }

@@ -67,7 +67,7 @@
         <div class="logo">
             <img src="{{ asset('logo2.png') }}" alt="Logo">
             <p style="text-align:center; font-weight:bold; margin-top:10px;">Welcome to IIUM Course Registration.</p>
-        <form action="/login" method="POST">
+        <form action="{{ route('login.submit') }}" method="POST">
             @csrf
             <label for="username" style="display:block; text-align:left;">Username:</label>
             <input type="username" name="username" id="username" placeholder="Enter your username" required>

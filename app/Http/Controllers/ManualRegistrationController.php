@@ -24,8 +24,8 @@ class ManualRegistrationController extends Controller
             'reason' => 'required|string|max:500',
         ]);
 
-        Registration::create([
-            'user_id' => 1,//later -> auth()->id(),
+        $registration = \App\Models\Registration::create([
+            'user_id' => auth()->id(),
             'subject_name' => $request->subject_name,
             'course_code' => $request->course_code,
             'current_credit_hours' => $request->current_credit_hours,
@@ -38,6 +38,7 @@ class ManualRegistrationController extends Controller
             'status' => 'PENDING',
         ]);
 
-        return redirect()->route('student.manual-registration.create')->with('success', 'Manual registration submitted successfully!');
+        return redirect()->route('student.dashboard')
+            ->with('success', 'Manual registration request submitted successfully! It will be reviewed by admin.');
     }
 }

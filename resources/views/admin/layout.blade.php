@@ -39,7 +39,10 @@
             margin-bottom: 20px;
         }
 
-        .sidebar a{
+        .sidebar a,
+        .sidebar button,
+        .sidebar .logout-btn,
+        .sidebar form button {
             display: block;
             padding: 20px 15px;
             margin-bottom: 10px;
@@ -49,8 +52,16 @@
             border-radius: 6px;
             font-weight: 500;
             transition: background 0.3s;
+            border: none;
+            text-align: centre;
+            width: 100%;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            box-sizing: border-box;
         }
-        .sidebar a:hover{
+
+        .sidebar a:hover, .sidebar button:hover, .sidebar .logout-btn:hover{
             background-color: #1abc9c;
         }
 
@@ -95,12 +106,15 @@
 
                 <a href="/admin/manual-approval"
                     class="{{ request()->is('admin/manual-approval') ? 'active' : '' }}">
-                    Manual Approval
+                    Manual Registration Approval
                 </a>
 
-                <a href="/student/logout">
-                    Logout
-                </a>
+                <form action="{{ route('logout') }}" method="POST" style="margin: 0; padding: 0;">
+                    @csrf
+                    <button type="submit" class="logout-btn">
+                        Logout
+                    </button>
+                </form>
             </div>
 
             <div class="content">
