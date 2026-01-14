@@ -24,11 +24,45 @@ class StudentController extends Controller{
         return redirect()->route('student.manual-registration')->with('success', 'Registration submitted successfully!');
     }
 
-    public function dashboard(){
-        $registrations = \App\Models\Registration::with('subject')->get(); //TEMPORARY student id(later change to auth()->id())
-        return view('student.dashboard', compact('registrations'));
-
+    public function dashboard()
+    {
+        // Get subjects for the current logged-in student
+        $subjects = Subject::where('user_id', auth()->id())
+                          ->where('semester', '1 2025/2026')
+                          ->get();
+        
+        return view('student.dashboard', compact('subjects'));
     }
+
+    public function timetable(){
+    // Dummy timetable data
+    $timetable = [
+        [
+            'code' => 'BICS1301',
+            'subject' => 'Introduction to Human Computer Interaction',
+            'day' => 'Monday',
+            'time' => '9:00 AM - 11:00 AM',
+            'venue' => 'KICT Lab 1'
+        ],
+        [
+            'code' => 'BICS1302',
+            'subject' => 'Introduction to Database Management',
+            'day' => 'Tuesday',
+            'time' => '10:00 AM - 12:00 PM',
+            'venue' => 'KICT Lecture Hall'
+        ],
+        [
+            'code' => 'BICS1303',
+            'subject' => 'Web Technologies and Development',
+            'day' => 'Thursday',
+            'time' => '2:00 PM - 4:00 PM',
+            'venue' => 'KICT Lab 3'
+        ],
+    ];
+
+    return view('student.timetable', compact('timetable'));
+    }
+
 
     public function logout(Request $request)
     {
@@ -44,5 +78,6 @@ class StudentController extends Controller{
             ->orderBy('created_at', 'desc')    
             ->get();
         return view('student.registration-status', compact('registrations'));
+
     }
 }

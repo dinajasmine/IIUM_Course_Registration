@@ -11,6 +11,11 @@ class AdminController extends Controller{
         return view('admin.dashboard');
     }
 
+    public function create()
+    {
+        $subjects = Subject::all(); // ambil dari database
+        return view('admin.subject-assignment', compact('subjects'));
+    }
      public function logout(Request $request)
     {
         Auth::logout();
@@ -22,7 +27,7 @@ class AdminController extends Controller{
 
     public function manualApproval(){
         $registrations = \App\Models\Registration::where('registration_type', 'MANUAL')
-            ->where('status', 'pending')
+            ->where('status', 'PENDING')
             ->with('student') // Load student relationship
             ->orderBy('created_at', 'desc')
             ->get();

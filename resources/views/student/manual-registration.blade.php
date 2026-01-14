@@ -32,22 +32,21 @@
     <div class="registration-card">
         <form method="POST" action="{{ route('student.manual-register.store') }}" class="registration-form">
             @csrf
-            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-            <input type="hidden" name="registration_type" value="MANUAL">
             
+            <input type="hidden" name="registration_type" value="MANUAL">
             <!-- Subject Information -->
             <div class="form-section">
                 <h3>Course Information</h3>
                 <div class="form-grid">
                     <!--subject name-->
                     <div class="form-group">
-                        <label for="subject_name">
-                            Subject Name :
+                        <label for="course_name">
+                            Course Name :
                         </label>
                         <input type="text" 
-                               id="subject_name"
-                               name="subject_name" 
-                               value="{{ old('subject_name') }}"
+                               id="course_name"
+                               name="course_name" 
+                               value="{{ old('course_name') }}"
                                placeholder="e.g., Introduction to Computer Science"
                                required>
                     </div>

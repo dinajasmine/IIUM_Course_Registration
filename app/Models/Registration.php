@@ -2,18 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Subject;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Registration extends Model
 {
-    protected $table ='registrations';
-
     protected $fillable = [
-        'user_id',
-        'subject_id',
-        'subject_name',
+        'matric_no',
+        'course_name',
         'course_code',
         'current_credit_hours',
         'completed_credit_hours',
@@ -23,34 +19,16 @@ class Registration extends Model
         'reason',
         'registration_type',
         'status',
-        'approved_at',
-        'approved_by',
-        'rejected_at',
-        'rejected_by',
-        'rejection_reason',
     ];
 
+    protected $casts = [
+        'current_credit_hours' => 'decimal:2',
+        'completed_credit_hours' => 'decimal:2',
+        'cgpa' => 'decimal:2',
+    ];
 
-     public function student()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'student_id');
-    }
-    
-    // Relationship with subject (if you have subject_id)
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class);
-    }
-    
-    // Scope for manual registrations
-    public function scopeManual($query)
-    {
-        return $query->where('registration_type', 'MANUAL');
-    }
-    
-    // Scope for pending registrations
-    public function scopePending($query)
-    {
-        return $query->where('status', 'pending');
+        return $this->belongsTo(User::class, 'user_id'); // or whatever column name
     }
 }

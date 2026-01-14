@@ -95,15 +95,17 @@
                     Dashboard
                 </a>
 
+                <a href="/student/registration"
+                    class="{{ request()->is('student/registration') ? 'active' : '' }}">
+                    Registration
+                </a>
+                
                 <a href="{{ route('student.manual-registration.create') }}"
                     class="{{ request()->is('student/manual-registration.create') ? 'active' : '' }}">
                     Manual Registration
                 </a>
 
-                <a href="/student/schedule"
-                    class="{{ request()->is('student/schedule') ? 'active' : '' }}">
-                    Schedule
-                </a>
+                
 
                 <form action="{{ route('logout') }}" method="POST" style="margin: 0; padding: 0;">
                     @csrf

@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
 
             //Student 
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('matric_no')->constrained()->cascadeOnDelete();
 
             //Course Reference (auto registration)
             $table->foreignId('subject_id')->nullable()->constrained()->cascadeOnDelete(); 
             $table->foreignId('section_id')->nullable()->constrained()->cascadeOnDelete(); 
 
             //manual registration fields
-            $table->string('subject_name')->nullable(); 
+            $table->string('course_name')->nullable(); 
             $table->string('course_code')->nullable();
             $table->float('current_credit_hours', 3, 2)->nullable();
             $table->float('completed_credit_hours', 3, 2)->nullable();
@@ -39,9 +39,7 @@ return new class extends Migration
             $table->foreignId('approved_by')->nullable()->references('id')->on('users');
             $table->timestamp('approved_at')->nullable();
 
-            $table->foreignId('rejected_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamp('rejected_at')->nullable();
-            $table->text('rejection_reason')->nullable();
+            
 
             $table->timestamps();
         });

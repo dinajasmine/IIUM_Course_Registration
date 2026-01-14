@@ -1,54 +1,123 @@
+@extends('student.layout')
 
-    @extends('student.layout')
+@section('content')
 
-    @section('content')
-
-    <head>
+<head>
     <title>Student Dashboard</title>
-    </head>
+    <style>
+        .dashboard-container {
+            margin-left: 250px;
+            padding: 20px;
+        }
 
-    <h1>Student Dashboard</h1>
-    <h2>Welcome {{ auth()->user()->name }}!</h2>
+        .banner {
+            background: #207c85;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
 
-    @if($registrations->count() == 0)
-        <p>You have no course registrations yet.</p>
-    @else
-     <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse;">
-        <thead>
-            <tr style="background: #2c3e50; color: white;">
-                <th>Subject Code</th>
-                <th>Subject Name</th>
-                <th>Credit Hours</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($registrations as $reg)
-            <tr>
-                <td>
-                    @if($reg->subject)
-                        {{ $reg->subject->code }}
-                    @else
-                        N/A
-                    @endif
-                </td>
-                <td>
-                    @if($reg->subject)
-                        {{ $reg->subject->name }}
-                    @else
-                        N/A
-                    @endif
-                </td>
-                <td>
-                    @if($reg->subject && $reg->subject->credit_hours)
-                        {{ $reg->subject->credit_hours }}
-                    @else
-                        N/A
-                    @endif
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endif
+        .content-box {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background: #207c85;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .btn {
+            background: #207c85;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #207c85;
+        }
+    </style>
+</head>
+
+@php
+    $subjects = [
+        [
+            'course_code' => 'BICS1301',
+            'subject_name' => 'Introduction to Human Computer Interaction',
+            'credit' => 3
+        ],
+        [
+            'course_code' => 'BICS1302',
+            'subject_name' => 'Introduction to Database Management',
+            'credit' => 3
+        ],
+        [
+            'course_code' => 'BICS1303',
+            'subject_name' => 'Web Technologies and Development',
+            'credit' => 3
+        ],
+        [
+            'course_code' => 'BITI1304',
+            'subject_name' => 'Fundamentals of Information Technology',
+            'credit' => 2
+        ],
+    ];
+@endphp
+
+<div class="dashboard-container">
+
+    <!-- Banner -->
+    <div class="banner">
+        <h1>Subject Registered for Semester 1 2025/2026</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="content-box">
+
+        <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Subject Name</th>
+                    <th>Credit Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($subjects as $subject)
+                <tr>
+                    <td>{{ $subject['course_code'] }}</td>
+                    <td>{{ $subject['subject_name'] }}</td>
+                    <td>{{ $subject['credit'] }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
 @endsection
-

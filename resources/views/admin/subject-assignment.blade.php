@@ -6,7 +6,7 @@
 <div class="approval-container">
     <h1>Subject Assignment</h1>
 
-    <form method="POST" action="{{ route('admin.subject.assignment.store') }}">
+    <form method="POST" action="{{ route('subject-assignment.store') }}">
         @csrf
 
         @if($subjects->isEmpty())
@@ -30,7 +30,7 @@
                                 <input type="checkbox" name="subjects[]" value="{{ $subject->id }}">
                             </td>
                             <td>{{ $subject->code }}</td>
-                            <td>{{ $subject->title }}</td>
+                            <td>{{ $subject->name }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -53,7 +53,7 @@
         padding-bottom: 10px;
         border-bottom: 2px solid #1abc9c;
     }
-
+ 
     .no-data{
         text-align: center;
         padding: 40px;

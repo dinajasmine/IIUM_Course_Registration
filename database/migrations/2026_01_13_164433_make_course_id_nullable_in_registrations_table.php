@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sections', function (Blueprint $table) {
-            
-            $table->id();
-            $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
-            $table->string('section_name'); 
-            $table->integer('max_students')->default(50);
-            $table->timestamps();
-
+        Schema::table('registrations', function (Blueprint $table) {
+            //
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sections');
+        Schema::table('registrations', function (Blueprint $table) {
+            //
+        });
     }
 };

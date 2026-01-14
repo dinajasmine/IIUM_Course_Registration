@@ -99,8 +99,8 @@
                     Dashboard
                 </a>
 
-                <a href="/admin/subject-assignment"
-                    class="{{ request()->is('/subject-assignment') ? 'active' : '' }}">
+                <a href="/admin/assign-subject"
+                    class="{{ request()->is('admin/assign-subject') ? 'active' : '' }}">
                     Assign Subject
                 </a>
 
