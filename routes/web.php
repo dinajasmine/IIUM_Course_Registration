@@ -24,6 +24,13 @@ Route::prefix('student')->middleware(['auth'])->group(function () {
         Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
         Route::get('/timetable', [StudentController::class, 'timetable'])->name('student.timetable');
 
+        Route::get('/student/registration', [CourseRegistrationController::class, 'index'])
+            ->name('student.registration');
+        Route::post('/course/register', [CourseRegistrationController::class, 'register'])
+            ->name('course.register');
+        Route::post('/course/unregister', [CourseRegistrationController::class, 'unregister'])
+            ->name('course.unregister');
+        
         //manual registration
         Route::get('/manual-registration', [ManualRegistrationController::class, 'create'])->name('student.manual-registration.create');
         Route::post('/manual-registration', [ManualRegistrationController::class, 'store'])->name('student.manual-register.store');
